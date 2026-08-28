@@ -72,36 +72,95 @@
             transform: scale(1.1);
         }
 
-        /* WhatsApp Button Container */
-        .whatsapp-container {
-            margin: 30px 0;
-            text-align: center;
+        /* WhatsApp Card Container */
+        .whatsapp-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 350px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #25D366;
         }
 
-        .whatsapp-btn {
-            display: inline-block;
+        .whatsapp-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .whatsapp-icon img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .whatsapp-number {
+            text-align: left;
+        }
+
+        .whatsapp-number .name {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .whatsapp-number .number {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .whatsapp-number .status {
+            color: #25D366;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .whatsapp-number .more-options {
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* Connect Button */
+        .connect-btn {
             background: #25D366;
             color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
             font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            text-align: center;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
             transition: all 0.3s;
-            cursor: pointer;
+            width: 100%;
         }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-        }
-
-        .whatsapp-btn img {
-            vertical-align: middle;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
+        .connect-btn:hover {
+            background: #1da851;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.6);
         }
 
         /* Bottom Ad Container */
@@ -140,9 +199,19 @@
                 height: 35px;
             }
             
-            .whatsapp-btn {
-                padding: 12px 30px;
-                font-size: 18px;
+            .whatsapp-card {
+                max-width: 300px;
+                padding: 15px;
+            }
+
+            .whatsapp-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-icon img {
+                width: 30px;
+                height: 30px;
             }
         }
     </style>
@@ -179,15 +248,28 @@
             <h2>Welcome to Our Page</h2>
             <p>This is your main content area. Add your text, articles, or anything here.</p>
             <br>
-            <p>Scroll down to see more content and the WhatsApp button below.</p>
+            <p>Check out our WhatsApp support below!</p>
         </div>
 
-        <!-- WHATSAPP BUTTON (Linked to Smartlink) -->
-        <div class="whatsapp-container">
-            <a href="https://www.profitableratecpmnetwork.com/d1hwiw8u?key=00113a4584f0dce86f8b1a0987d5783e" class="whatsapp-btn" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-                Chat With Us on WhatsApp
-            </a>
+        <!-- WHATSAPP CARD (Clickable Div) -->
+        <div class="whatsapp-card" onclick="window.open('https://www.profitableratecpmnetwork.com/d1hwiw8u?key=00113a4584f0dce86f8b1a0987d5783e', '_blank')">
+            
+            <div class="whatsapp-card-header">
+                <div class="whatsapp-icon">
+                    <img src="/wicon.png" alt="WhatsApp">
+                </div>
+                <div class="whatsapp-number">
+                    <div class="name">WhatsApp Support</div>
+                    <div class="number">+91 9238...</div>
+                    <div class="status">● Online</div>
+                    <div class="more-options">See more options...</div>
+                </div>
+            </div>
+            
+            <div class="connect-btn">
+                Connect Now
+            </div>
+            
         </div>
 
         <!-- More content -->
