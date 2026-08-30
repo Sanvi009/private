@@ -1,91 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>empty · background</title>
-  <style>
-    /* RESET – absolute zero, no text, no content, nothing */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* root element – occupies full screen, no extra */
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      height: 100%;
-    }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
-    body {
-      /* background – image located at site root (background.jpg) */
-      background-image: url('/background.jpg');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;          /* full coverage, responsive */
-      
-      /* remove everything – no text, no content, no pseudo-elements */
-      font-size: 0;
-      line-height: 0;
-      
-      /* optional: make sure nothing overflows or creates scrollbars */
-      overflow-x: hidden;
-      overflow-y: hidden;
-    }
+        body {
+            background-image: url('/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            font-size: 0;
+            line-height: 0;
+        }
 
-    /* additional security: eliminate any residual whitespace / artifacts */
-    body::before,
-    body::after,
-    html::before,
-    html::after {
-      display: none;
-      content: none;
-      position: absolute;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
+        /* remove all potential content artifacts */
+        body::before,
+        body::after,
+        html::before,
+        html::after {
+            display: none;
+            content: none;
+        }
 
-    /* support for browsers that might show a default outline or focus */
-    :focus {
-      outline: none;
-    }
+        /* WhatsApp-style circular profile picture */
+        .profile-container {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
 
-    /* remove any browser's default tap highlight */
-    * {
-      -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-    }
+        .profile-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* full viewport – even on mobile with address bar */
-    html {
-      height: 100dvh;
-    }
-    
-    body {
-      height: 100dvh;
-      background-attachment: fixed; /* keeps image stable on some devices */
-    }
+        /* responsive adjustments for very small screens */
+        @media (max-width: 400px) {
+            .profile-container {
+                width: 90px;
+                height: 90px;
+                top: 20px;
+                border-width: 2.5px;
+            }
+        }
 
-    /* last resort: no scrollbars, no content, no text nodes */
-    a, span, div, p, h1, h2, h3, h4, h5, h6, 
-    ul, li, section, article, header, footer, 
-    nav, main, aside, figure, figcaption, blockquote, pre {
-      font-size: 0;
-      line-height: 0;
-      text-indent: -9999px;
-      letter-spacing: -9999px;
-      word-spacing: -9999px;
-      color: transparent;
-      background: transparent;
-    }
-  </style>
+        @media (max-height: 500px) {
+            .profile-container {
+                width: 80px;
+                height: 80px;
+                top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- this page contains absolutely no element – no text, no decoration -->
-  <!-- background.jpg is called via CSS, root of the site -->
+    <!-- Circular profile picture - WhatsApp style -->
+    <div class="profile-container">
+        <img src="/assets/dp.png" alt="">
+    </div>
 </body>
 </html>
