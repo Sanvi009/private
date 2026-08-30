@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>empty · background</title>
+  <style>
+    /* RESET – absolute zero, no text, no content, nothing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* root element – occupies full screen, no extra */
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      height: 100%;
+    }
+
+    body {
+      /* background – image located at site root (background.jpg) */
+      background-image: url('background.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;          /* full coverage, responsive */
+      
+      /* remove everything – no text, no content, no pseudo-elements */
+      font-size: 0;
+      line-height: 0;
+      
+      /* optional: make sure nothing overflows or creates scrollbars */
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    /* additional security: eliminate any residual whitespace / artifacts */
+    body::before,
+    body::after,
+    html::before,
+    html::after {
+      display: none;
+      content: none;
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* support for browsers that might show a default outline or focus */
+    :focus {
+      outline: none;
+    }
+
+    /* remove any browser's default tap highlight */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    /* full viewport – even on mobile with address bar */
+    html {
+      height: 100dvh;
+    }
+    
+    body {
+      height: 100dvh;
+      background-attachment: fixed; /* keeps image stable on some devices */
+    }
+
+    /* last resort: no scrollbars, no content, no text nodes */
+    a, span, div, p, h1, h2, h3, h4, h5, h6, 
+    ul, li, section, article, header, footer, 
+    nav, main, aside, figure, figcaption, blockquote, pre {
+      font-size: 0;
+      line-height: 0;
+      text-indent: -9999px;
+      letter-spacing: -9999px;
+      word-spacing: -9999px;
+      color: transparent;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- this page contains absolutely no element – no text, no decoration -->
+  <!-- background.jpg is called via CSS, root of the site -->
+</body>
+</html>
