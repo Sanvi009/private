@@ -1,97 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#111111">
     <title>profile</title>
+
     <style>
+        :root {
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.88);
+            --whatsapp: #00a884;
+            --whatsapp-dark: #008f72;
+            --glass: rgba(10, 10, 10, 0.38);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow: 0 12px 35px rgba(0, 0, 0, 0.38);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
-            height: 100%;
-            overflow: hidden;
+            min-height: 100%;
         }
 
         body {
-            background-image: url('/background.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            background-attachment: fixed;
+            min-height: 100svh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            isolation: isolate;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: #111 url("/background.jpg") center / cover no-repeat fixed;
         }
 
-        /* remove all potential content artifacts */
-        body::before,
-        body::after,
-        html::before,
-        html::after {
-            display: none;
-            content: none;
-        }
-
-        /* WhatsApp-style circular profile picture */
-        .profile-container {
+        /* Subtle contrast layer: keeps the original full-screen background,
+           while preventing foreground elements from getting lost in bright areas. */
+        body::before {
+            content: "";
             position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.20) 0%,
+                    rgba(0, 0, 0, 0.06) 42%,
+                    rgba(0, 0, 0, 0.22) 100%
+                );
+        }
+
+        .profile {
+            width: min(100%, 420px);
+            min-height: 100svh;
+            padding:
+                max(30px, env(safe-area-inset-top) + 18px)
+                20px
+                max(24px, env(safe-area-inset-bottom) + 16px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-picture {
             width: 120px;
             height: 120px;
-            border-radius: 50%;
+            flex: 0 0 auto;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            background-color: rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            border-radius: 50%;
+            padding: 3px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow:
+                0 8px 28px rgba(0, 0, 0, 0.48),
+                0 2px 8px rgba(0, 0, 0, 0.28);
         }
 
-        .profile-container img {
+        .profile-picture img {
+            display: block;
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            display: block;
         }
 
-        /* WhatsApp-style name below the profile picture */
         .profile-name {
-            position: fixed;
-            top: 160px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin-top: 10px;
+            color: var(--text);
             font-size: 20px;
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-            white-space: nowrap;
-            z-index: 1000;
-            letter-spacing: 0.3px;
-            line-height: 1.4;
+            line-height: 1.35;
+            font-weight: 600;
+            letter-spacing: 0.1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
         }
 
-        /* WhatsApp-style partially hidden phone number */
         .profile-phone {
-            position: fixed;
-            top: 195px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.9);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-            white-space: nowrap;
-            z-index: 1000;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
+            margin-top: 3px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.4;
+            font-weight: 400;
+            letter-spacing: 0.45px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
         }
 
         .phone-visible {
@@ -101,168 +125,203 @@
         .phone-hidden {
             display: inline-block;
             filter: blur(4px);
-            opacity: 0.5;
+            opacity: 0.55;
             user-select: none;
             pointer-events: none;
         }
 
         .lock-icon {
+            margin-left: 1px;
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-            margin-left: 2px;
+            line-height: 1;
+            opacity: 0.78;
         }
 
-        /* WhatsApp-style contact button */
         .contact-button {
-            position: fixed;
-            top: 240px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #00a884;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 12px 40px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
+            margin-top: 25px;
+            min-height: 48px;
+            padding: 12px 34px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 15px rgba(0, 168, 132, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            letter-spacing: 0.3px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--whatsapp);
+            font: inherit;
+            font-size: 15px;
+            line-height: 1;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            text-decoration: none;
             white-space: nowrap;
+            cursor: pointer;
+            box-shadow:
+                0 8px 22px rgba(0, 0, 0, 0.22),
+                0 5px 18px rgba(0, 168, 132, 0.30);
+            transition:
+                transform 160ms ease,
+                background-color 160ms ease,
+                box-shadow 160ms ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .contact-button:hover {
-            background-color: #008f72;
-            transform: translateX(-50%) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 168, 132, 0.5);
+            background: var(--whatsapp-dark);
+            transform: translateY(-1px);
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.25),
+                0 7px 22px rgba(0, 168, 132, 0.38);
         }
 
         .contact-button:active {
-            transform: translateX(-50%) scale(0.95);
-            box-shadow: 0 2px 10px rgba(0, 168, 132, 0.4);
+            transform: translateY(1px) scale(0.97);
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.24),
+                0 3px 12px rgba(0, 168, 132, 0.28);
+        }
+
+        .contact-button:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.82);
+            outline-offset: 4px;
         }
 
         .button-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
             line-height: 1;
         }
 
-        /* Instruction text below the contact button */
         .instruction-text {
-            position: fixed;
-            top: 295px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-            line-height: 1.6;
-            text-align: center;
-            max-width: 350px;
-            width: 90%;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.35);
+            width: min(100%, 350px);
+            margin-top: 14px;
             padding: 10px 15px;
-            border-radius: 12px;
-            backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.2px;
-            word-spacing: 0.5px;
+            border: 1px solid var(--glass-border);
+            border-radius: 13px;
+            color: rgba(255, 255, 255, 0.94);
+            background: var(--glass);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-size: 13px;
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.05px;
+            word-spacing: 0.35px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.72);
         }
 
-        /* responsive adjustments */
         @media (max-width: 400px) {
-            .profile-container {
-                width: 90px;
-                height: 90px;
-                top: 20px;
-                border-width: 2.5px;
+            .profile {
+                padding-left: 16px;
+                padding-right: 16px;
             }
+
+            .profile-picture {
+                width: 92px;
+                height: 92px;
+                padding: 2.5px;
+            }
+
             .profile-name {
-                top: 120px;
+                margin-top: 8px;
                 font-size: 17px;
             }
+
             .profile-phone {
-                top: 150px;
+                margin-top: 2px;
                 font-size: 12px;
             }
+
             .contact-button {
-                top: 190px;
+                margin-top: 21px;
+                min-height: 44px;
+                padding: 10px 30px;
                 font-size: 14px;
-                padding: 10px 35px;
             }
+
             .instruction-text {
-                top: 240px;
-                font-size: 11px;
+                width: min(100%, 290px);
+                margin-top: 12px;
                 padding: 8px 12px;
-                max-width: 280px;
+                font-size: 11px;
+                line-height: 1.55;
             }
         }
 
         @media (max-height: 500px) {
-            .profile-container {
+            .profile {
+                padding-top: max(10px, env(safe-area-inset-top) + 6px);
+            }
+
+            .profile-picture {
                 width: 80px;
                 height: 80px;
-                top: 10px;
+                padding: 2px;
             }
+
             .profile-name {
-                top: 100px;
+                margin-top: 6px;
                 font-size: 15px;
             }
+
             .profile-phone {
-                top: 125px;
+                margin-top: 1px;
                 font-size: 11px;
             }
+
             .contact-button {
-                top: 160px;
+                margin-top: 15px;
+                min-height: 38px;
+                padding: 8px 26px;
                 font-size: 13px;
-                padding: 8px 30px;
             }
+
             .instruction-text {
-                top: 200px;
-                font-size: 10px;
+                width: min(100%, 270px);
+                margin-top: 9px;
                 padding: 6px 10px;
-                max-width: 260px;
+                font-size: 10px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .contact-button {
+                transition: none;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Circular profile picture - WhatsApp style -->
-    <div class="profile-container">
-        <img src="/assets/dp.png" alt="">
-    </div>
-    
-    <!-- Name below the profile picture - WhatsApp style -->
-    <div class="profile-name">খাদিজা আক্তার</div>
-    
-    <!-- Partially hidden phone number - WhatsApp style -->
-    <div class="profile-phone">
-        <span class="phone-visible">+912838</span>
-        <span class="phone-hidden">384384</span>
-        <span class="lock-icon">🔒</span>
-    </div>
+    <main class="profile">
+        <div class="profile-picture">
+            <img src="/assets/dp.png" alt="">
+        </div>
 
-    <!-- WhatsApp-style contact button -->
-    <a href="https://www.google.com" target="_blank" class="contact-button">
-        <span class="button-icon">💬</span>
-        Connect
-    </a>
+        <div class="profile-name">খাদিজা আক্তার</div>
 
-    <!-- Instruction text below the contact button -->
-    <div class="instruction-text">
-        WhatsApp-এ যোগাযোগ করতে উপরের Connect বাটনে ক্লিক করুন, তাহলে সরাসরি আমার WhatsApp-এ যুক্ত হতে পারবেন। একবার না হলে দ্বিতীয়বার চেষ্টা করুন।
-    </div>
+        <div class="profile-phone" aria-label="Partially hidden phone number">
+            <span class="phone-visible">+912838</span>
+            <span class="phone-hidden">384384</span>
+            <span class="lock-icon" aria-hidden="true">🔒</span>
+        </div>
+
+        <a href="https://www.google.com"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-button">
+            <span class="button-icon" aria-hidden="true">💬</span>
+            <span>Connect</span>
+        </a>
+
+        <div class="instruction-text">
+            WhatsApp-এ যোগাযোগ করতে উপরের Connect বাটনে ক্লিক করুন, তাহলে সরাসরি আমার WhatsApp-এ যুক্ত হতে পারবেন। একবার না হলে দ্বিতীয়বার চেষ্টা করুন।
+        </div>
+    </main>
 </body>
 </html>
