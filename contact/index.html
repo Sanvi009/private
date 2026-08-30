@@ -119,7 +119,7 @@
             top: 240px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #00a884; /* WhatsApp green */
+            background-color: #00a884;
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-size: 15px;
@@ -150,10 +150,35 @@
             box-shadow: 0 2px 10px rgba(0, 168, 132, 0.4);
         }
 
-        /* WhatsApp-style message icon */
         .button-icon {
             font-size: 18px;
             line-height: 1;
+        }
+
+        /* Instruction text below the contact button */
+        .instruction-text {
+            position: fixed;
+            top: 295px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+            line-height: 1.6;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 10px 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.2px;
+            word-spacing: 0.5px;
         }
 
         /* responsive adjustments */
@@ -177,6 +202,12 @@
                 font-size: 14px;
                 padding: 10px 35px;
             }
+            .instruction-text {
+                top: 240px;
+                font-size: 11px;
+                padding: 8px 12px;
+                max-width: 280px;
+            }
         }
 
         @media (max-height: 500px) {
@@ -197,6 +228,12 @@
                 top: 160px;
                 font-size: 13px;
                 padding: 8px 30px;
+            }
+            .instruction-text {
+                top: 200px;
+                font-size: 10px;
+                padding: 6px 10px;
+                max-width: 260px;
             }
         }
     </style>
@@ -220,7 +257,12 @@
     <!-- WhatsApp-style contact button -->
     <a href="https://www.google.com" target="_blank" class="contact-button">
         <span class="button-icon">💬</span>
-        Contact
+        Connect
     </a>
+
+    <!-- Instruction text below the contact button -->
+    <div class="instruction-text">
+        WhatsApp-এ যোগাযোগ করতে উপরের Connect বাটনে ক্লিক করুন, তাহলে সরাসরি আমার WhatsApp-এ যুক্ত হতে পারবেন। একবার না হলে দ্বিতীয়বার চেষ্টা করুন।
+    </div>
 </body>
 </html>
