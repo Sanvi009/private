@@ -73,20 +73,7 @@
             text-align: center;
         }
 
-        .online-dot {
-            position: absolute;
-            right: 4px;
-            bottom: 6px;
-            width: 17px;
-            height: 17px;
-            border: 3px solid rgba(255, 255, 255, 0.96);
-            border-radius: 50%;
-            background: #25d366;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
-        }
-
         .profile-picture {
-            position: relative;
             width: 120px;
             height: 120px;
             flex: 0 0 auto;
@@ -150,26 +137,8 @@
             opacity: 0.78;
         }
 
-        .online-status {
-            margin-top: 1px;
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 12px;
-            line-height: 1.3;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .about-line {
-            margin-top: 7px;
-            color: rgba(255, 255, 255, 0.88);
-            font-size: 12px;
-            line-height: 1.4;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
         .contact-button {
-            margin-top: 21px;
+            margin-top: 25px;
             min-height: 48px;
             padding: 12px 34px;
             display: inline-flex;
@@ -251,19 +220,7 @@
                 padding-right: 16px;
             }
 
-            .online-dot {
-            position: absolute;
-            right: 4px;
-            bottom: 6px;
-            width: 17px;
-            height: 17px;
-            border: 3px solid rgba(255, 255, 255, 0.96);
-            border-radius: 50%;
-            background: #25d366;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
-        }
-
-        .profile-picture {
+            .profile-picture {
                 width: 92px;
                 height: 92px;
                 padding: 2.5px;
@@ -279,26 +236,8 @@
                 font-size: 12px;
             }
 
-            .online-status {
-            margin-top: 1px;
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 12px;
-            line-height: 1.3;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .about-line {
-            margin-top: 7px;
-            color: rgba(255, 255, 255, 0.88);
-            font-size: 12px;
-            line-height: 1.4;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .contact-button {
-                margin-top: 18px;
+            .contact-button {
+                margin-top: 21px;
                 min-height: 44px;
                 padding: 10px 30px;
                 font-size: 14px;
@@ -318,19 +257,7 @@
                 padding-top: max(10px, env(safe-area-inset-top) + 6px);
             }
 
-            .online-dot {
-            position: absolute;
-            right: 4px;
-            bottom: 6px;
-            width: 17px;
-            height: 17px;
-            border: 3px solid rgba(255, 255, 255, 0.96);
-            border-radius: 50%;
-            background: #25d366;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
-        }
-
-        .profile-picture {
+            .profile-picture {
                 width: 80px;
                 height: 80px;
                 padding: 2px;
@@ -346,26 +273,8 @@
                 font-size: 11px;
             }
 
-            .online-status {
-            margin-top: 1px;
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 12px;
-            line-height: 1.3;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .about-line {
-            margin-top: 7px;
-            color: rgba(255, 255, 255, 0.88);
-            font-size: 12px;
-            line-height: 1.4;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .contact-button {
-                margin-top: 12px;
+            .contact-button {
+                margin-top: 15px;
                 min-height: 38px;
                 padding: 8px 26px;
                 font-size: 13px;
@@ -381,25 +290,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .online-status {
-            margin-top: 1px;
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 12px;
-            line-height: 1.3;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .about-line {
-            margin-top: 7px;
-            color: rgba(255, 255, 255, 0.88);
-            font-size: 12px;
-            line-height: 1.4;
-            font-weight: 400;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.72);
-        }
-
-        .contact-button {
+            .contact-button {
                 transition: none;
             }
         }
@@ -410,15 +301,20 @@
     <main class="profile">
         <div class="profile-picture">
             <img src="/assets/dp.png" alt="">
+            <span class="online-dot" aria-hidden="true"></span>
         </div>
 
         <div class="profile-name">খাদিজা আক্তার</div>
+
+        <div class="online-status">online</div>
 
         <div class="profile-phone" aria-label="Partially hidden phone number">
             <span class="phone-visible">+912838</span>
             <span class="phone-hidden">384384</span>
             <span class="lock-icon" aria-hidden="true">🔒</span>
         </div>
+
+        <div class="about-line">Available on WhatsApp</div>
 
         <a href="https://www.google.com"
            target="_blank"
